@@ -22,12 +22,8 @@ class MockContainer extends Container
         return parent::get($id, $invalidBehavior);
     }
 
-    public function has($id)
+    public function hasMockedService($id)
     {
-        if (array_key_exists($id, $this->mockedServices)) {
-            return true;
-        }
-
-        return parent::has($id);
+        return array_key_exists($id, $this->mockedServices);
     }
 }

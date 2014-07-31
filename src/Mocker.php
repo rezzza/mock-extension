@@ -20,12 +20,17 @@ class Mocker
         $this->kernelDriverUsed = $this->isKernelDriverUsed($mink);
     }
 
-    public function mockService($serviceId, $adapter)
+    public function mockService($serviceId, MockEngine $adapter)
     {
         $mock = $adapter->createMock();
         $this->container->overrideService($serviceId, $mock);
 
         return $mock;
+    }
+
+    public function getMockedService($serviceId)
+    {
+        return $this->container->get($serviceId);
     }
 
     private function isContainerBypassing()
