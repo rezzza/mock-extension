@@ -1,6 +1,6 @@
 # Behat Mock Extension
 
-Let the mock engine you want come to help you in your behat tests by mocking the Symfony services.
+Let the mock engine that you want coming to help you in your behat tests by mocking the Symfony services.
 
 *Only Behat 2 supported for now*.
 
@@ -44,7 +44,13 @@ $mockGoutte = $this->mocker->mockService(
 );
 ```
 
-Then use the mock created the way your mock engine works.
+Then follow the instructions of your mock engine to use the result
+
+## Contribute
+
+If you want to see your prefered mock engine, you can make a PR by creation the adapter.
+
+It just needs to follow `Rezzza\MockExtension\MockEngine` interface.
 
 ## Credit
 
