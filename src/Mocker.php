@@ -8,20 +8,22 @@ class Mocker
 {
     private $container;
 
-    private $bypassingContainer;
+    private $mink;
 
-    private $kernelDriverUsed;
+    private $bypassingContainer;
 
     public function __construct(KernelInterface $kernel, $mink)
     {
         $this->container = $kernel->getContainer();
-
+        $this->mink = $mink;
         $this->bypassingContainer = $this->isContainerBypassing();
-        $this->kernelDriverUsed = $this->isKernelDriverUsed($mink);
     }
 
     public function mockService($serviceId, MockEngine $adapter)
     {
+        $this->guardAgainstContainerNotOverrided();
+        $this->guardAgainstKernelDriverNotUsed();
+
         $mock = $adapter->createMock();
         $this->container->overrideService($serviceId, $mock);
 
@@ -52,8 +54,8 @@ class Mocker
 
     private function guardAgainstKernelDriverNotUsed()
     {
-        if (false === $this->kernelDriverUsed) {
-            throw new \LogicException('We can mock services only with symfony2 driver. Please use @mink:symfony tag on scenario you want to can mock services');
+        if ('symfony2' !== $this->mink->getDefaultSessionName()) {
+            throw new \LogicException('We can mock services only with symfony2 driver. Please use @mink:symfony tag on scenario you want to be able to mock services');
         }
     }
 }

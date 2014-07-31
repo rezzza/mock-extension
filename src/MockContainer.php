@@ -15,7 +15,7 @@ class MockContainer extends Container
 
     public function get($id, $invalidBehavior = self::EXCEPTION_ON_INVALID_REFERENCE)
     {
-        if (array_key_exists($id, $this->mockedServices)) {
+        if ($this->hasMockedService($id, $this->mockedServices)) {
             return $this->mockedServices[$id];
         }
 
