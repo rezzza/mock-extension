@@ -2,6 +2,7 @@
 
 namespace Rezzza\MockExtension;
 
+use Behat\Mink\Mink;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 class Mocker
@@ -12,7 +13,7 @@ class Mocker
 
     private $bypassingContainer;
 
-    public function __construct(KernelInterface $kernel, $mink)
+    public function __construct(KernelInterface $kernel, Mink $mink)
     {
         $this->container = $kernel->getContainer();
         $this->mink = $mink;
@@ -28,6 +29,11 @@ class Mocker
         $this->container->overrideService($serviceId, $mock);
 
         return $mock;
+    }
+
+    public function unmockService($serviceId)
+    {
+        $this->container->removeMock($serviceId);
     }
 
     public function getMockedService($serviceId)

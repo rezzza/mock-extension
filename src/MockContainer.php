@@ -6,17 +6,24 @@ use Symfony\Component\DependencyInjection\Container;
 
 class MockContainer extends Container
 {
-     private $mockedServices = array();
+    private static $mockedServices = array();
 
     public function overrideService($id, $mock)
     {
-        $this->mockedServices[$id] = $mock;
+        self::$mockedServices[$id] = $mock;
+    }
+
+    public function removeMock($id)
+    {
+        if ($this->hasMockedService($id)) {
+            unset(self::$mockedServices[$id]);
+        }
     }
 
     public function get($id, $invalidBehavior = self::EXCEPTION_ON_INVALID_REFERENCE)
     {
-        if ($this->hasMockedService($id, $this->mockedServices)) {
-            return $this->mockedServices[$id];
+        if ($this->hasMockedService($id)) {
+            return self::$mockedServices[$id];
         }
 
         return parent::get($id, $invalidBehavior);
@@ -24,6 +31,6 @@ class MockContainer extends Container
 
     public function hasMockedService($id)
     {
-        return array_key_exists($id, $this->mockedServices);
+        return array_key_exists($id, self::$mockedServices);
     }
 }
