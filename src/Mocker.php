@@ -61,7 +61,7 @@ class Mocker
     private function guardAgainstKernelDriverNotUsed()
     {
         if ('symfony2' !== $this->mink->getDefaultSessionName()) {
-            throw new \LogicException('We can mock services only with symfony2 driver. Please use @mink:symfony tag on scenario you want to be able to mock services');
+            throw new \LogicException('We can mock services only with symfony2 driver. Please use "@mink:symfony2" tag on scenario you want to be able to mock services');
         }
     }
 }
