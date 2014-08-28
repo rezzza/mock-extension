@@ -2,10 +2,10 @@
 
 namespace Rezzza\MockExtension;
 
-use Behat\Behat\Context\ContextInterface;
-use Behat\Behat\Context\Initializer\InitializerInterface;
+use Behat\Behat\Context\Context;
+use Behat\Behat\Context\Initializer\ContextInitializer;
 
-class MockerAwareInitializer implements InitializerInterface
+class MockerAwareInitializer implements ContextInitializer
 {
     private $mocker;
 
@@ -14,13 +14,12 @@ class MockerAwareInitializer implements InitializerInterface
         $this->mocker = $mocker;
     }
 
-    public function supports(ContextInterface $context)
+    public function initializeContext(Context $context)
     {
-        return $context instanceof MockerAware;
-    }
+        if (!$context instanceof MockerAware) {
+            return;
+        }
 
-    public function initialize(ContextInterface $context)
-    {
         $context->setMocker($this->mocker);
     }
 }

@@ -4,13 +4,13 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="rezzza.mock_extension.mocker" class="Rezzza\MockExtension\Mocker">
-            <argument type="service" id="behat.symfony2_extension.kernel" />
-            <argument type="service" id="behat.mink" />
+            <argument type="service" id="symfony2_extension.kernel" />
+            <argument type="service" id="mink" />
         </service>
 
         <service id="rezzza.mock_extension.initializer" class="Rezzza\MockExtension\MockerAwareInitializer">
             <argument type="service" id="rezzza.mock_extension.mocker" />
-            <tag name="behat.context.initializer" />
+            <tag name="context.initializer" />
         </service>
     </services>
 </container>

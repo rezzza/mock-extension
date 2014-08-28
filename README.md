@@ -2,7 +2,8 @@
 
 Let the mock engine that you want coming to help you in your behat tests by mocking the Symfony services.
 
-*Only Behat 2 supported for now*.
+* dev-master : Behat 2.5.x
+* dev-behat3 : Behat 3.0.x
 
 ## Adapters
 
