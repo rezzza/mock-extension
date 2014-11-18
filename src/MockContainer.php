@@ -11,6 +11,11 @@ class MockContainer extends Container
     public function overrideService($id, $mock)
     {
         self::$mockedServices[$id] = $mock;
+
+        if ($this->has($id) === true) {
+            $this->get('kernel')->shutdown();
+            $this->get('kernel')->boot();
+        }
     }
 
     public function removeMock($id)
