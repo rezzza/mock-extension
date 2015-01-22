@@ -11,6 +11,7 @@
         <service id="rezzza.mock_extension.initializer" class="Rezzza\MockExtension\MockerAwareInitializer">
             <argument type="service" id="rezzza.mock_extension.mocker" />
             <tag name="behat.context.initializer" />
+            <tag name="behat.event_subscriber" />
         </service>
     </services>
 </container>

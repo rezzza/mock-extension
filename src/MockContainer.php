@@ -38,4 +38,9 @@ class MockContainer extends Container
     {
         return array_key_exists($id, self::$mockedServices);
     }
+
+    public function resetMocks()
+    {
+        self::$mockedServices = array();
+    }
 }
