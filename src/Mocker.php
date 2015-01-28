@@ -8,9 +8,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 class Mocker
 {
     private $container;
-
     private $mink;
-
     private $bypassingContainer;
 
     public function __construct(KernelInterface $kernel, Mink $mink)
@@ -39,6 +37,11 @@ class Mocker
     public function getMockedService($serviceId)
     {
         return $this->container->get($serviceId);
+    }
+
+    public function unmockAllServices()
+    {
+        $this->container->resetMocks();
     }
 
     private function isContainerBypassing()
