@@ -3,6 +3,7 @@
 namespace Rezzza\MockExtension;
 
 use Behat\Mink\Mink;
+use Behat\Symfony2Extension\Driver\KernelDriver;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 class Mocker
@@ -46,9 +47,9 @@ class Mocker
         return $this->container instanceof MockContainer;
     }
 
-    private function isKernelDriverUsed($mink)
+    private function isKernelDriverUsed()
     {
-        return 'symfony2' === $mink->getDefaultSessionName();
+        return $this->mink->getSession()->getDriver() instanceof KernelDriver;
     }
 
     private function guardAgainstContainerNotOverrided()
@@ -60,7 +61,7 @@ class Mocker
 
     private function guardAgainstKernelDriverNotUsed()
     {
-        if ('symfony2' !== $this->mink->getDefaultSessionName()) {
+        if (!$this->isKernelDriverUsed()) {
             throw new \LogicException('We can mock services only with symfony2 driver. Please use "@mink:symfony2" tag on scenario you want to be able to mock services');
         }
     }
