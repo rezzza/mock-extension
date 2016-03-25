@@ -1,5 +1,7 @@
 # Behat Mock Extension
 
+**DEPRECATED** We no longer provide support for this extension. Feel free to fork.
+
 Let the mock engine that you want coming to help you in your behat tests by mocking the Symfony services.
 
 *Only Behat 2 supported for now*.
